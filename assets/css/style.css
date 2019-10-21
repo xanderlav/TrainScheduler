@@ -1,23 +1,7 @@
-/*-----------------INDEX---------------------*/
-  /*** 1.0 BOX SIZING ***/
-  /*** 2.0 COLOR ***/
-  	/* 2.1 #FFF - White */
-  	/* 2.2 #282828 - Graphite */
-  	/* 2.3 #080808 - Almost Black */
-  /*** 3.0 TEXT & FONTS ***/
-  /*** 4.0 PAGE & TOP CONSTRUCTION ***/
-  /*** 5.0 PANELS ***/
-  /*** 6.0 TABLE ***/
-  /*** 7.0 FORM ***/
-/*------------------------------------------*/
-
-/*** 1.0 BOX SIZING ***/
 * {
     box-sizing: border-box;
   }
-  /* Keep border and padding inside the box measurement */
-  
-  /*** 3.0 TEXT & FONTS ***/
+
   @import url('https://fonts.googleapis.com/css?family=Montserrat');
   
   .theTitle{
@@ -25,19 +9,23 @@
       font-size: 10vw;
       text-align: left;
       margin: 0px;
-      padding-left: 20px;
-      color: #FFF; /* white */
+      padding-left: 15px;
+      color: green; 
   }
-  h3{
-      color: #FFF; /* white */
-  }
+
   .tag-line{
-      font-family: 'Montserrat', sans-serif;
-      text-align: left;
-      margin: 0px;
-      padding-left: 20px;
-      color: #FFF; /* white */
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    margin: 0px;
+    padding-left: 15px;
+    color: grenn;
+}
+
+  h3{
+      color:green;
   }
+
+
   
   /*** 4.0 PAGE & TOP CONSTRUCTION ***/
   html, body {

@@ -19,7 +19,7 @@ $( "#target" ).submit(function( event ) {
   	// Grabs user input
   	var trainName = $("#train-input").val().trim();
   	var destinationName = $("#destination-input").val().trim();
-  	var timeStart = moment($("#time-input").val().trim(), "HH:mm").format("X");
+  	var timeStart = moment($("#1st-train").val().trim(), "HH:mm").format("X");
   	var frequencyRate = $("#frequency-input").val().trim();
 
   	// Creates local "temporary" object for holding train data
@@ -31,7 +31,7 @@ $( "#target" ).submit(function( event ) {
   	};
 
 	// Uploads train data to the database
-	database.ref().push(newTrain);
+	database.ref("/trainProject").push(newTrain);
 
 	// Logs train data to console
 	console.log(newTrain.name);
@@ -45,7 +45,7 @@ $( "#target" ).submit(function( event ) {
 	// Clears all of the text-boxes
 	$("#train-input").val("");
 	$("#destination-input").val("");
-	$("#time-input").val("");
+	$("#1st-train").val("");
 	$("#frequency-input").val("");
 
 	// Determine when the next train arrives.
@@ -53,15 +53,15 @@ $( "#target" ).submit(function( event ) {
 });
 
 //Firebase event for adding train to the database and a row in the html
-database.ref("/trainScheduler").on("child_added", function(childSnapshot, prevChildKey) {
+database.ref("/trainProject").on("child_added", function(snapshot, prevChildKey) {
 
-	console.log(childSnapshot.val());
+	console.log(snapshot.val());
 
 	// Store train info into a variable.
-	var trainName = childSnapshot.val().name;
-	var destinationName = childSnapshot.val().destination;
-	var timeStart = childSnapshot.val().start;
-	var frequencyRate = childSnapshot.val().frequency;
+	var trainName = snapshot.val().name;
+	var destinationName = snapshot.val().destination;
+	var timeStart = snapshot.val().start;
+	var frequencyRate = snapshot.val().frequency;
 
 	// Train Info
 	console.log(trainName);
