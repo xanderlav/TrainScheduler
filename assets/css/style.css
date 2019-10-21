@@ -2,47 +2,47 @@
     box-sizing: border-box;
   }
 
+  
   @import url('https://fonts.googleapis.com/css?family=Montserrat');
   
   .theTitle{
       font-family: 'Montserrat', sans-serif;
-      font-size: 10vw;
+      font-size: 8vw;
       text-align: left;
-      margin: 0px;
+      margin: 2px;
       padding-left: 15px;
-      color: green; 
+      color: green;
   }
 
-  .tag-line{
+  .etiq-line{
     font-family: 'Montserrat', sans-serif;
     text-align: left;
     margin: 0px;
     padding-left: 15px;
-    color: grenn;
+    color: green;
 }
 
   h3{
       color:green;
   }
 
-
   
-  /*** 4.0 PAGE & TOP CONSTRUCTION ***/
   html, body {
     height: 100%;
   }
+
   body{
-      background-color: #282828; /* Graphite */
+      background-color: crimson; 
   }
   
   .myHeader{
       margin-top: 0px;
-      margin-bottom: 30px;
-      border: 0px;
-      padding-top: 20px;
+      margin-bottom: 25px;
+      border: 1px;
+      padding-top: 15px;
       padding-left: 10px;
       height: 200px;
-      background-image: url("../images/train_lights.jpg");
+      background-image: url("../images/city-1940691_640.jpg");
   }
   
   /*** 5.0 PANELS ***/
