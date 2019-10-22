@@ -67,11 +67,11 @@ $( "#target" ).submit(function( event ) {
 	var dateCreated = childSnapshot.val().dateCreated;
 
 	// Train Info
-	console.log(trainName);
-	console.log(destinationName);
-	console.log("1st train: " + trainStart);
-	console.log(freqRate);
-	console.log("d add: " + moment(dateCreated).format("YYYYMMDD"));
+	// console.log(trainName);
+	// console.log(destinationName);
+	// console.log("1st train: " + trainStart);
+	// console.log(freqRate);
+	// console.log("d add: " + moment(dateCreated).format("YYYYMMDD"));
 
 	// Get first train departure
 	var firstTrain = moment(trainStart, "HH:mm");
