@@ -1,10 +1,17 @@
 * {
     box-sizing: border-box;
   }
+  
+  .myHeader{
+    margin-top: 0px;
+    margin-bottom: 25px;
+    border: 1px;
+    padding-top: 15px;
+    padding-left: 10px;
+    height: 250px;
+    background-image: url("../images/city-1940691_640.jpg");
+  }
 
-  
-  @import url('https://fonts.googleapis.com/css?family=Montserrat');
-  
   .theTitle{
       font-family: 'Montserrat', sans-serif;
       font-size: 8vw;
@@ -14,19 +21,7 @@
       color: green;
   }
 
-  .etiq-line{
-    font-family: 'Montserrat', sans-serif;
-    text-align: left;
-    margin: 0px;
-    padding-left: 15px;
-    color: green;
-}
-
-  h3{
-      color:green;
-  }
-
-  
+    
   html, body {
     height: 100%;
   }
@@ -35,44 +30,15 @@
       background-color: crimson; 
   }
   
-  .myHeader{
-      margin-top: 0px;
-      margin-bottom: 25px;
-      border: 1px;
-      padding-top: 15px;
-      padding-left: 10px;
-      height: 200px;
-      background-image: url("../images/city-1940691_640.jpg");
-  }
-  
-  /*** 5.0 PANELS ***/
   thead{
-      font-weight: bold;
+    color: rgb(238, 234, 26);
+    font-weight: bold;
+    font-style: italic;
+    background-color: darkred;
   }
   
-  /*** 7.0 FOOTER ***/
-  .sticky-fix{
-      padding-bottom: 85px;
+  .frmInput{
+    background-color: lightgray;
   }
-  footer{
-    background-color: rgba(8,8,8,0.5);
-    height: 85px;
-    padding-top: 10px;
-    padding-left: 20px;
-  }
-  .github{
-      text-align: left;
-      float: left;
-      width: 25%;
-      position: relative;
-       top: 50%;
-      transform: translateY(-50%);
-  }
-  .html5{
-      text-align: right;
-      float: right;
-      width: 25%;
-      position: relative;
-       top: 50%;
-      transform: translateY(-50%);
-  }
+
+  

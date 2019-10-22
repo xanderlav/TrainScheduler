@@ -13,21 +13,22 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-//Button for adding Trains
+//Button add trains
 $( "#target" ).submit(function( event ) {
 
   	// Grabs user input
   	var trainName = $("#train-input").val().trim();
   	var destinationName = $("#destination-input").val().trim();
-  	var timeStart = moment($("#1st-train").val().trim(), "HH:mm").format("X");
-  	var frequencyRate = $("#frequency-input").val().trim();
+  	var trainStart = $("#1st-train").val().trim();
+	var freqRate = $("#frequency-input").val().trim();
 
   	// Creates local "temporary" object for holding train data
   	var newTrain = {
     	name: trainName,
     	destination: destinationName,
-    	start: timeStart,
-    	frequency: frequencyRate
+    	start: trainStart,
+		frequency: freqRate,
+		dateCreated: firebase.database.ServerValue.TIMESTAMP
   	};
 
 	// Uploads train data to the database
@@ -38,62 +39,59 @@ $( "#target" ).submit(function( event ) {
 	console.log(newTrain.destination);
 	console.log(newTrain.start);
 	console.log(newTrain.frequency);
+	console.log("fecha creacion " + dateCreated.toDate);
 
 	// Alert
-	alert("Train successfully added");
+	alert("New train record added");
 
-	// Clears all of the text-boxes
+	// Reset the input fields
 	$("#train-input").val("");
 	$("#destination-input").val("");
 	$("#1st-train").val("");
 	$("#frequency-input").val("");
 
-	// Determine when the next train arrives.
+	// Calculates next train arrival
   	return false;
 });
 
 //Firebase event for adding train to the database and a row in the html
-database.ref("/trainProject").on("child_added", function(snapshot, prevChildKey) {
+	database.ref("/trainProject").on("child_added", function(childSnapshot) {
 
-	console.log(snapshot.val());
+	console.log(childSnapshot.val());
 
-	// Store train info into a variable.
-	var trainName = snapshot.val().name;
-	var destinationName = snapshot.val().destination;
-	var timeStart = snapshot.val().start;
-	var frequencyRate = snapshot.val().frequency;
+	// Store train info
+	var trainName = childSnapshot.val().name;
+	var destinationName = childSnapshot.val().destination;
+	var trainStart = childSnapshot.val().start;
+	var freqRate = childSnapshot.val().frequency;
+	var dateCreated = childSnapshot.val().dateCreated;
 
 	// Train Info
 	console.log(trainName);
 	console.log(destinationName);
-	console.log(timeStart);
-	console.log(frequencyRate);
+	console.log("1st train: " + trainStart);
+	console.log(freqRate);
+	console.log("d add: " + moment(dateCreated).format("YYYYMMDD"));
 
-	// First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTimeConverted = moment(timeStart, "HH:mm").subtract(1, "years");
-    console.log(firstTimeConverted);
+	// Get first train departure
+	var firstTrain = moment(trainStart, "HH:mm");
 
     // Current Time
     var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
 
-    // Difference between the times
-    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
+    // Difference between schedules
+    var diffSched = moment().diff(moment(firstTrain), "minutes");
 
     // Time apart (remainder)
-    var tRemainder = diffTime % frequencyRate;
-    console.log(tRemainder);
+    var timeRemain = diffSched % freqRate;
 
-     // Minute Until Train
-    var tMinutesTillTrain = frequencyRate - tRemainder;
-    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+     // Minutes until next train
+    var tMinsTrain = freqRate - timeRemain;
 
     // Next Train
-    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
-    var formattedTime = moment(nextTrain).format("HH:mm");
+    var nextTrain = moment().add(tMinsTrain, "minutes");
+	var formattedTime = moment(nextTrain).format("HH:mm");
 
 	// Add each train's data into the table
-	$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destinationName + "</td><td>" + frequencyRate + "</td><td>" + formattedTime + "</td><td>" + tMinutesTillTrain + "</td>");
+	$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destinationName + "</td><td>" + trainStart + "</td><td>"  + freqRate + "</td><td>" + formattedTime + "</td><td>" + tMinsTrain + "</td>");
 });
